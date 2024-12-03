@@ -28,7 +28,7 @@ const ChauffeurNew = () => {
   }
 
   return (
-    <div className="p-6">
+    <div className="p-52">
       <h2 className="text-xl font-semibold mb-4">Nouveau voyage</h2>
 
       {/* Sélection de l'emplacement */}

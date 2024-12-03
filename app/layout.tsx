@@ -34,11 +34,11 @@ export default function RootLayout({
         >
           <SidebarProvider>
             <ChauffeurSidebar/>
-        <div className="flex flex-col min-h-[100vh] justify-between h-full w-full">
-        {children}
-        <Footer/>
-        </div>
-        </SidebarProvider>
+              <div className="flex flex-col min-h-[100vh] justify-between h-full w-full">
+                {children}
+                <Footer/>
+              </div>
+          </SidebarProvider>
       </body>
     </html>
   );

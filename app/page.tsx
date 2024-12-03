@@ -1,16 +1,18 @@
-import { Voyage } from '@/components/chauffeur/voyageChart'
-import React from 'react'
-import ChauffeurNew from './chauffeur/new/page'
+import { Voyage } from '@/components/chauffeur/voyageChart';
+import LoginForm from '@/components/login/loginForm';
+import React from 'react';
 
 const Dashbord = () => {
   return (
-    <div className='flex w-full'>
-      
-      <div className='w-full'>
-      <Voyage/>
+    <>
+      <LoginForm />
+      <div className='flex w-full'>
+        <div className='w-full'>
+          <Voyage />
+        </div>
       </div>
-    </div>
-  )
-}
+    </>
+  );
+};
 
-export default Dashbord
+export default Dashbord;
