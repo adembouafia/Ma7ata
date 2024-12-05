@@ -7,7 +7,7 @@ const data = {
     {
       title: "Dashboard",
       actions: [
-        { title: "Accueil", url: "/", icon: <Home /> },
+        { title: "Accueil", url: "/dashbord", icon: <Home /> },
       ],
     },
     {
@@ -24,7 +24,7 @@ const data = {
       actions: [
         { title: "Informations personnelles", url: "#", icon: <User /> },
         { title: "Changer le mot de passe", url: "#", icon: <Lock /> },
-        { title: "Déconnecter", url: "#", icon: <LogOut /> },
+        { title: "Déconnecter", url: "/", icon: <LogOut /> },
       ],
     },
   ],

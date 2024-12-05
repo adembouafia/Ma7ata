@@ -1,9 +1,9 @@
 import {NextResponse} from "next/server";
 import { connectMongoDB } from "../../../lib/mongodb";
-import Chauffeur from "../../../models/user";
+import Chauffeur from "../../../models/chauffeur";
 import bycript from 'bcryptjs';
 
-export async function POST(req: { json: () => PromiseLike<{ email: any; name: any; password: any; }> | { email: any; name: any; password: any; }; }){
+export async function POST(req: { json: () => PromiseLike<{ email: any; name: any; password: any; }>}){
     try{
         const {email , name , password} = await req.json();
         const hashedPassword = await bycript.hash(password,10);

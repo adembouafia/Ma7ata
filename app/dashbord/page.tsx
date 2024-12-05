@@ -1,5 +1,5 @@
-import ChauffeurInfo from "@/components/chauffeur/chauffeurInfo";
+import { Voyage } from "@/components/chauffeur/voyageChart";
 
 export default function Dashbord(){
-    return <ChauffeurInfo/>
+    return <Voyage/>
 }

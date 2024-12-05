@@ -6,11 +6,6 @@ const Dashbord = () => {
   return (
     <>
       <LoginForm />
-      <div className='flex w-full'>
-        <div className='w-full'>
-          <Voyage />
-        </div>
-      </div>
     </>
   );
 };

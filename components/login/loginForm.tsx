@@ -13,7 +13,7 @@ const LoginForm = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Connexion Chauffeur
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
+            <form className="space-y-4 md:space-y-6" action="/dashbord">
               <div>
                 <label
                   htmlFor="email"
