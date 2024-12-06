@@ -13,7 +13,7 @@ const data = {
     {
       title: "Trips",
       actions: [
-        { title: "Créer un nouveau trajet", url: "/chauffeur/new", icon: <Car /> },
+        { title: "Créer un nouveau trajet", url: "/dashbord/chauffeur/newtrajet", icon: <Car /> },
         { title: "Voir les voyages en cours en même trajet", url: "#", icon: <Car /> },
         { title: "Consulter l'historique des trajets", url: "#", icon: <History /> },
         { title: "Changer l'état d'un trajet", url: "#", icon: <Car /> },

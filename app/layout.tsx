@@ -32,12 +32,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-[100vh] h-full`}
         >
-          {/* <SidebarProvider>
-            <ChauffeurSidebar/> */}
               <div className="flex flex-col min-h-[100vh] justify-between h-full w-full">
                 {children}
               </div>
-          {/* </SidebarProvider> */}
       </body>
     </html>
   );
