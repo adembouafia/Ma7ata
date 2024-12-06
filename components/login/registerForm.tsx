@@ -2,57 +2,60 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import Swal from 'sweetalert2'
 
 const SignUp = () => {
-    const [email , setEmail] = useState('');
-    const [name , setName] = useState('');
-    const [password , setPassword] = useState('');
-    const [error , setError] = useState('');
-    const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false)
 
-    const handleSubmit = async (e: { preventDefault: () => void; target: any; }) => {
-        e.preventDefault();
-        if(!name || !email || !password){
-            setError("all fields are necessary !")
-            return ;
-        }
-
-        try {
-            const resChauffeurExist = await fetch('api/chauffeurExist',{
-                method : "POST",
-                headers : {
-                    'Content-Type' : 'application/json',
-                    },
-                    body : JSON.stringify({email})
-            })
-
-            const {chauffeur} = await resChauffeurExist.json();
-            if (chauffeur) {
-                setError("Chauffeur already exist")
-                return;
-            }
-            const res = await fetch('api/register' , {
-                method : "POST",
-                headers : {
-                    "Content-Type" : "application/json"
-                },
-                body : JSON.stringify({
-                    name, email , password
-                })
-            })
-
-            if (res.ok){
-                const form = e.target;
-                form.reset();
-                router.push("/")
-            }
-            else{
-                console.log("User registration failed ! ")
-            }
-        } catch (error) {
-            console.log("error during regestration ! " , error);
-        }
+  const handleSubmit = async (e: { preventDefault: () => void; target: any; }) => {
+    e.preventDefault();
+    if (!name || !email || !password) {
+      setError("all fields are necessary !")
+      return;
     }
+
+    try {
+      setIsLoading(true)
+      const res = await fetch('api/register', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name, email, password
+        })
+      })
+
+      if (res.ok) {
+        const form = e.target;
+        console.log(res)
+        setIsLoading(false)
+        form.reset();
+        Swal.fire({
+          title: 'Success',
+          text: 'You have been registered successfully',
+          icon: 'success',
+          confirmButtonText: "Go to log in",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            router.push("/")
+
+          } 
+        });
+      }
+      else {
+        setIsLoading(false)
+        console.log("error:", res.body)
+      }
+    } catch (error) {
+      console.log("error during regestration ! ", error);
+    }
+  }
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
@@ -60,7 +63,7 @@ const SignUp = () => {
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                Connexion Chauffeur
+              Connexion Chauffeur
             </h1>
             <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6" action="#">
               <div>
@@ -71,7 +74,7 @@ const SignUp = () => {
                   Nom complet
                 </label>
                 <input
-                onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => setName(e.target.value)}
                   type="text"
                   name="name"
                   id="name"
@@ -88,7 +91,7 @@ const SignUp = () => {
                   Votre email
                 </label>
                 <input
-                    onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                   type="email"
                   name="email"
                   id="email"
@@ -105,7 +108,7 @@ const SignUp = () => {
                   Mot de passe
                 </label>
                 <input
-                onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                   type="password"
                   name="password"
                   id="password"
@@ -114,22 +117,24 @@ const SignUp = () => {
                   required
                 />
               </div>
-            
+
               <button
                 type="submit"
                 className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
-                S'inscrire
+                {
+                  isLoading ? "loading..." : "S'inscrire"
+                }
               </button>
-            { error && (
-              <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
-                {error}
-              </div>
-            )}
+              {error && (
+                <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+                  {error}
+                </div>
+              )}
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Vous avez déjà un compte ?{" "}
                 <a
-                  href="/"  
+                  href="/"
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
                   Se connecter
